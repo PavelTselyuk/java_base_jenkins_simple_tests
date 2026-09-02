@@ -22,20 +22,16 @@ allure {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:5.10.0",
+            'com.codeborne:selenide:7.18.1',
+            'io.qameta.allure:allure-selenide:2.19.0')
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.14.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
-tasks.withType(Test) {
+test {
     useJUnitPlatform()
-
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
+    systemProperties(System.getProperties())
 }
